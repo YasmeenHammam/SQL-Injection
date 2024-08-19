@@ -9,7 +9,7 @@ SQL_INJECTION_PATTERNS = [
     r"(\bOR\b|\bor\b)",             # Matches ' OR ' or 'or'
     r"(\bAND\b|\band\b)",           # Matches ' AND ' or 'and'
     r"(union\s+select)",            # Matches 'union select'
-    r"(--|\#|\;)",                  # Matches SQL comments and statement separators
+    r"(--|\#)",                     # Matches SQL comments and statement separators
     r"(\bXOR\b|\bxor\b)",           # Matches ' XOR ' or 'xor'
     r"(\bEXEC\b|\bexec\b)",         # Matches ' EXEC ' or 'exec'
     r"(\bINSERT\b|\binsert\b)",     # Matches ' INSERT ' or 'insert'
@@ -31,7 +31,7 @@ def detect_sql_injection(data):
 def waf():
     print("[DEBUGGING] GOT INTO WAF MIDDLEWARE")
     
-    # query parameters
+    # checking query parameters
     for key, value in request.args.items():
         decoded_value = urllib.parse.unquote(value)  
         print(f"[DEBUGGING] Checking query param: {key} = {decoded_value}")
@@ -39,21 +39,21 @@ def waf():
             waf_logger.info(f"SQL Injection attempt: {key} = {value}")
             abort(403)  
 
-    # form data
+    # checking form data
     for key, value in request.form.items():
         print(f"[DEBUGGING] Checking form data: {key} = {value}")
         if detect_sql_injection(value):
             waf_logger.info(f"SQL Injection attempt: {key} = {value}")
             abort(403)  
 
-    # headers
+    # checking headers
     for key, value in request.headers.items():
         print(f"[DEBUGGING] Checking header: {key} = {value}")
         if detect_sql_injection(value):
             waf_logger.info(f"SQL Injection attempt: {key} = {value}")
             abort(403)  
 
-    # raw body
+    # checking raw body
     if request.data:
         body = request.data.decode('utf-8')
         print(f"[DEBUGGING] Checking raw body: {body}")
