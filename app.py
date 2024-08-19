@@ -29,26 +29,26 @@ def detect_sql_injection(data):
 
 @app.before_request
 def waf():
-    print("[DEBUGGING] GOT INTO WAF MIDDLEWARE")
+    # print("[DEBUGGING] GOT INTO WAF MIDDLEWARE")
     
     # checking query parameters
     for key, value in request.args.items():
         decoded_value = urllib.parse.unquote(value)  
-        print(f"[DEBUGGING] Checking query param: {key} = {decoded_value}")
+        # print(f"[DEBUGGING] Checking query param: {key} = {decoded_value}")
         if detect_sql_injection(value):
             waf_logger.info(f"SQL Injection attempt: {key} = {value}")
             abort(403)  
 
     # checking form data
     for key, value in request.form.items():
-        print(f"[DEBUGGING] Checking form data: {key} = {value}")
+        # print(f"[DEBUGGING] Checking form data: {key} = {value}")
         if detect_sql_injection(value):
             waf_logger.info(f"SQL Injection attempt: {key} = {value}")
             abort(403)  
 
     # checking headers
     for key, value in request.headers.items():
-        print(f"[DEBUGGING] Checking header: {key} = {value}")
+        # print(f"[DEBUGGING] Checking header: {key} = {value}")
         if detect_sql_injection(value):
             waf_logger.info(f"SQL Injection attempt: {key} = {value}")
             abort(403)  
@@ -56,7 +56,7 @@ def waf():
     # checking raw body
     if request.data:
         body = request.data.decode('utf-8')
-        print(f"[DEBUGGING] Checking raw body: {body}")
+        # print(f"[DEBUGGING] Checking raw body: {body}")
         if detect_sql_injection(body):
             waf_logger.info(f"SQL Injection attempt: {body}")
             abort(403)   
