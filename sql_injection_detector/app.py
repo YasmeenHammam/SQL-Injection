@@ -1,6 +1,6 @@
 import re
 from flask import Flask,abort, request
-from waf_logging import waf_logger
+from .waf_logging import waf_logger
 import urllib.parse
 
 app = Flask(__name__)
