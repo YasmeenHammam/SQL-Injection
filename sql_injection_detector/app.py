@@ -1,6 +1,6 @@
 import re
 from flask import Flask,abort, request
-from waf_logging import waf_logger
+from .waf_logging import waf_logger
 import urllib.parse
 
 app = Flask(__name__)
@@ -16,6 +16,7 @@ SQL_INJECTION_PATTERNS = [
     r"(\bDROP\b|\bdrop\b)",         # Matches ' DROP ' or 'drop'
     r"(\bUPDATE\b|\bupdate\b)",     # Matches ' UPDATE ' or 'update'
     r"(\bDELETE\b|\bdelete\b)",     # Matches ' DELETE ' or 'delete'
+    r"(\bSELECT\b|\bselect\b)",     # Matches ' SELECT ' or 'select'
     r"('.*')",                      # Matches patterns with single quotes around content
     r"(')",                         # Matches any single quote
     r"(1\s*=\s*1)",                 # Matches '1=1' patterns

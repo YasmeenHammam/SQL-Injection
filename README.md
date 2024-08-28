@@ -1,20 +1,81 @@
-# Topics-in-Network-Security
+# SQL Injection Detector
 
-How to use the tool ?
-# Step 1: Clone the Git Repository
-git clone git@github.com:YasmeenHammam/SQL-Injection.git
+A Python package to detect SQL injection attempts using a Flask-based web application.
 
-# Step 2: Navigate into the project directory
-cd SQL-Injection
+## Installation
 
-# Step 3: Set Up Python Virtual Environment
-python -m venv venv
+Follow these steps to install and use the SQL Injection detection package in your Flask app:
 
-# Step 4: Activate the Virtual Environment
-source venv/Scripts/activate
+### 1. Clone the Repository:
 
-# Step 5: Install Dependencies from requirements.txt
-pip install -r requirements.txt
+Open your terminal and run the following command to clone the repository:
 
-# Step 6: Run the SQL Injection Detection Tool using Waitress
-waitress-serve --port=8000 app:app
+```bash
+git clone https://github.com/YasmeenHammam/SQL-Injection
+```
+
+### 2. Navigate to Your Existing Flask App Directory:
+
+Open a terminal and navigate to the directory where your Flask app is located.
+
+```bash
+cd /path/to/your/flask-app
+```
+
+### 3. Set Up a Virtual Environment:
+
+If you don't already have a virtual environment for your Flask app, you can create and activate one:
+
+- Create a virtual environment:
+  ```bash
+  python -m venv venv
+  ```
+- Activate the virtual environment:
+  For Git Bash or WSL (Unix-like shell on Windows):
+  ```bash
+  source venv/Scripts/activate
+  ```
+
+  For Windows Command Prompt:
+  ```bash
+  venv\Scripts\activate
+  ```
+
+  For Windows PowerShell:
+  ```bash
+  .\venv\Scripts\Activate
+  ```
+
+  For Linux/MacOS:
+  ```bash
+  source venv/bin/activate
+  ```
+
+Note: After activation, you should see (venv) at the start of your command line, indicating that the virtual environment is active.
+
+### 4. Install the SQL Injection Detection Package:
+
+install the package using pip by providing the path to the cloned SQL-Injection directory:
+
+```bash
+pip install /path/to/SQL-Injection
+```
+
+Replace /path/to/SQL-Injection with the actual path to where you cloned the SQL-Injection repository.
+
+### 5. Import and Use the Middleware Function in Your Flask App:
+
+In your Flask application script, import the waf function from the package:
+
+```bash
+from sql_injection_detector import waf
+```
+
+### 6. Register the Middleware with Your Flask App:
+
+Add the waf middleware to your Flask app to protect against SQL injection:
+```bash
+app.before_request(waf)
+```
+
+This line should be added after you create your Flask app instance (app = Flask(**name**)) to ensure that the waf function runs before each request.
