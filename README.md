@@ -31,6 +31,7 @@ If you don't already have a virtual environment for your Flask app, you can crea
   python -m venv venv
   ```
 - Activate the virtual environment:
+
   For Git Bash or WSL (Unix-like shell on Windows):
   ```bash
   source venv/Scripts/activate
