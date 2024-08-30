@@ -49,7 +49,7 @@ If you don't already have a virtual environment for your Flask app, you can crea
 
   For Linux/MacOS:
   ```bash
-  source venv/bin/activate
+  source .venv/bin/activate
   ```
 
 Note: After activation, you should see (venv) at the start of your command line, indicating that the virtual environment is active.
